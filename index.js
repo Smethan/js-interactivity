@@ -15,15 +15,21 @@ function addMovie(event) {
     document.querySelector('input').value = ''
 }
 function deleteMovie(event) {
+    message.textContent = `${event.target.parentNode.querySelector('span').textContent} deleted!`
     event.target.parentNode.remove()
-    message.textContent = "Movie deleted!"
+    revealMessage()
 }
 function crossOffMovie(event) {
     event.target.classList.toggle("checked")
     if (event.target.classList.contains('checked')) {
-        message.textContent = "Movie watched!"
+        message.textContent = `${event.target.textContent} watched!`
     } else {
-        message.textContent = "Movie... unwatched?"
+        message.textContent = `${event.target.textContent }... unwatched?`
     }
+    revealMessage()
+}
+function revealMessage() {
+    message.classList.remove('hide')
+    setTimeout(() => {message.classList.add('hide')}, 1000)
 }
 document.querySelector('form').addEventListener("submit", addMovie)
